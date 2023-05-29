@@ -13,22 +13,14 @@ import java.util.List;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class ArticlePageVo {
+public class ArticleBaseVo {
     private Long id;
 
     private String title;
 
-    private String abs;
-
     private String cover;
 
-    private Integer views;
-
     private Boolean top;
-
-    private CategoryEntity category;
-
-    private List<TagEntity> tags;
 
     @JsonFormat(pattern = "yyyy-MM-dd")
     private Date createTime;

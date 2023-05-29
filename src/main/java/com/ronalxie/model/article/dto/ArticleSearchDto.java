@@ -11,6 +11,8 @@ import java.util.Date;
 @AllArgsConstructor
 public class ArticleSearchDto {
 
+    private Long id;
+
     private String title;
 
     private Boolean top;

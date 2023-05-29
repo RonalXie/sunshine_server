@@ -1,7 +1,12 @@
 package com.ronalxie.mapper;
 
 import com.ronalxie.model.tag.TagEntity;
+import org.apache.ibatis.annotations.Mapper;
 
+import java.util.List;
+
+
+@Mapper
 public interface TagMapper {
     int deleteByPrimaryKey(Long id);
 
@@ -14,4 +19,7 @@ public interface TagMapper {
     int updateByPrimaryKeySelective(TagEntity record);
 
     int updateByPrimaryKey(TagEntity record);
+
+    List<TagEntity> selectByArticleId(Long articleId);
+
 }

@@ -13,7 +13,7 @@ import java.util.List;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class ArticlePageVo {
+public class ArticleInfoVo {
     private Long id;
 
     private String title;
@@ -21,6 +21,8 @@ public class ArticlePageVo {
     private String abs;
 
     private String cover;
+
+    private String content;
 
     private Integer views;
 
@@ -32,6 +34,9 @@ public class ArticlePageVo {
 
     @JsonFormat(pattern = "yyyy-MM-dd")
     private Date createTime;
+
+    @JsonFormat(pattern = "yyyy-MM-dd")
+    private Date updateTime;
 
 
 

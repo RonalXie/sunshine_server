@@ -18,7 +18,7 @@
     from tag
     where id = #{id,jdbcType=BIGINT}
   </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
     delete from tag
     where id = #{id,jdbcType=BIGINT}
   </delete>
@@ -103,4 +103,10 @@
       delete_time = #{deleteTime,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=BIGINT}
   </update>
+  <select id="selectByArticleId" resultMap="BaseResultMap">
+    select <include refid="Base_Column_List"></include> from tag
+            where id in(select tag_id from article_tag where article_id =#{articleId})
+  </select>
+
+
 </mapper>

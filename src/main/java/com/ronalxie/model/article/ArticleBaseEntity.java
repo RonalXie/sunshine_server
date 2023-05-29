@@ -16,8 +16,6 @@ public class ArticleBaseEntity {
 
     private String abs;
 
-    private Long contentId;
-
     private String cover;
 
     private Integer views;

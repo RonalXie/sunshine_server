@@ -1,7 +1,9 @@
 package com.ronalxie.mapper;
 
 import com.ronalxie.model.category.CategoryEntity;
+import org.apache.ibatis.annotations.Mapper;
 
+@Mapper
 public interface CategoryMapper {
     int deleteByPrimaryKey(Long id);
 
@@ -14,4 +16,5 @@ public interface CategoryMapper {
     int updateByPrimaryKeySelective(CategoryEntity record);
 
     int updateByPrimaryKey(CategoryEntity record);
+
 }
