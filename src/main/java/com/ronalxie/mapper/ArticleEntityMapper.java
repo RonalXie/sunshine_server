@@ -1,6 +1,6 @@
 package com.ronalxie.mapper;
 
-import com.ronalxie.model.ArticleEntity;
+import com.ronalxie.model.article.ArticleEntity;
 
 public interface ArticleEntityMapper {
     int deleteByPrimaryKey(Long id);

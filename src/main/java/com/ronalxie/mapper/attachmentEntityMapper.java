@@ -1,6 +1,6 @@
 package com.ronalxie.mapper;
 
-import com.ronalxie.model.attachmentEntity;
+import com.ronalxie.model.attachment.attachmentEntity;
 
 public interface attachmentEntityMapper {
     int deleteByPrimaryKey(Long id);

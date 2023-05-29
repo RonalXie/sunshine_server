@@ -1,6 +1,6 @@
 package com.ronalxie.mapper;
 
-import com.ronalxie.model.TagEntity;
+import com.ronalxie.model.tag.TagEntity;
 
 public interface TagEntityMapper {
     int deleteByPrimaryKey(Long id);

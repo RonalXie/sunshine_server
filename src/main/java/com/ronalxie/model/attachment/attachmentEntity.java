@@ -1,23 +1,19 @@
-package com.ronalxie.model;
+package com.ronalxie.model.attachment;
 
 import java.util.Date;
 
-public class ArticleEntity {
+public class attachmentEntity {
     private Long id;
 
     private String name;
 
-    private String abs;
+    private String bucket;
 
-    private Long contentId;
+    private String type;
 
-    private String cover;
+    private String size;
 
-    private Integer views;
-
-    private Byte top;
-
-    private Long categoryId;
+    private String url;
 
     private Long userId;
 
@@ -43,52 +39,36 @@ public class ArticleEntity {
         this.name = name == null ? null : name.trim();
     }
 
-    public String getAbs() {
-        return abs;
+    public String getBucket() {
+        return bucket;
     }
 
-    public void setAbs(String abs) {
-        this.abs = abs == null ? null : abs.trim();
+    public void setBucket(String bucket) {
+        this.bucket = bucket == null ? null : bucket.trim();
     }
 
-    public Long getContentId() {
-        return contentId;
+    public String getType() {
+        return type;
     }
 
-    public void setContentId(Long contentId) {
-        this.contentId = contentId;
+    public void setType(String type) {
+        this.type = type == null ? null : type.trim();
     }
 
-    public String getCover() {
-        return cover;
+    public String getSize() {
+        return size;
     }
 
-    public void setCover(String cover) {
-        this.cover = cover == null ? null : cover.trim();
+    public void setSize(String size) {
+        this.size = size == null ? null : size.trim();
     }
 
-    public Integer getViews() {
-        return views;
+    public String getUrl() {
+        return url;
     }
 
-    public void setViews(Integer views) {
-        this.views = views;
-    }
-
-    public Byte getTop() {
-        return top;
-    }
-
-    public void setTop(Byte top) {
-        this.top = top;
-    }
-
-    public Long getCategoryId() {
-        return categoryId;
-    }
-
-    public void setCategoryId(Long categoryId) {
-        this.categoryId = categoryId;
+    public void setUrl(String url) {
+        this.url = url == null ? null : url.trim();
     }
 
     public Long getUserId() {

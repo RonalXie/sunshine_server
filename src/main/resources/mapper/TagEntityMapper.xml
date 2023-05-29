@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.ronalxie.mapper.TagEntityMapper">
-  <resultMap id="BaseResultMap" type="com.ronalxie.model.TagEntity">
+  <resultMap id="BaseResultMap" type="com.ronalxie.model.tag.TagEntity">
     <id column="id" jdbcType="BIGINT" property="id" />
     <result column="name" jdbcType="VARCHAR" property="name" />
     <result column="count" jdbcType="INTEGER" property="count" />
@@ -22,7 +22,7 @@
     delete from tag
     where id = #{id,jdbcType=BIGINT}
   </delete>
-  <insert id="insert" parameterType="com.ronalxie.model.TagEntity">
+  <insert id="insert" parameterType="com.ronalxie.model.tag.TagEntity">
     insert into tag (id, name, count, 
       create_time, update_time, delete_time
       )
@@ -30,7 +30,7 @@
       #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}, #{deleteTime,jdbcType=TIMESTAMP}
       )
   </insert>
-  <insert id="insertSelective" parameterType="com.ronalxie.model.TagEntity">
+  <insert id="insertSelective" parameterType="com.ronalxie.model.tag.TagEntity">
     insert into tag
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="id != null">
@@ -73,7 +73,7 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.ronalxie.model.TagEntity">
+  <update id="updateByPrimaryKeySelective" parameterType="com.ronalxie.model.tag.TagEntity">
     update tag
     <set>
       <if test="name != null">
@@ -94,7 +94,7 @@
     </set>
     where id = #{id,jdbcType=BIGINT}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.ronalxie.model.TagEntity">
+  <update id="updateByPrimaryKey" parameterType="com.ronalxie.model.tag.TagEntity">
     update tag
     set name = #{name,jdbcType=VARCHAR},
       count = #{count,jdbcType=INTEGER},

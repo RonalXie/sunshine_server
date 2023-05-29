@@ -1,19 +1,23 @@
-package com.ronalxie.model;
+package com.ronalxie.model.article;
 
 import java.util.Date;
 
-public class attachmentEntity {
+public class ArticleEntity {
     private Long id;
 
     private String name;
 
-    private String bucket;
+    private String abs;
 
-    private String type;
+    private Long contentId;
 
-    private String size;
+    private String cover;
 
-    private String url;
+    private Integer views;
+
+    private Byte top;
+
+    private Long categoryId;
 
     private Long userId;
 
@@ -39,36 +43,52 @@ public class attachmentEntity {
         this.name = name == null ? null : name.trim();
     }
 
-    public String getBucket() {
-        return bucket;
+    public String getAbs() {
+        return abs;
     }
 
-    public void setBucket(String bucket) {
-        this.bucket = bucket == null ? null : bucket.trim();
+    public void setAbs(String abs) {
+        this.abs = abs == null ? null : abs.trim();
     }
 
-    public String getType() {
-        return type;
+    public Long getContentId() {
+        return contentId;
     }
 
-    public void setType(String type) {
-        this.type = type == null ? null : type.trim();
+    public void setContentId(Long contentId) {
+        this.contentId = contentId;
     }
 
-    public String getSize() {
-        return size;
+    public String getCover() {
+        return cover;
     }
 
-    public void setSize(String size) {
-        this.size = size == null ? null : size.trim();
+    public void setCover(String cover) {
+        this.cover = cover == null ? null : cover.trim();
     }
 
-    public String getUrl() {
-        return url;
+    public Integer getViews() {
+        return views;
     }
 
-    public void setUrl(String url) {
-        this.url = url == null ? null : url.trim();
+    public void setViews(Integer views) {
+        this.views = views;
+    }
+
+    public Byte getTop() {
+        return top;
+    }
+
+    public void setTop(Byte top) {
+        this.top = top;
+    }
+
+    public Long getCategoryId() {
+        return categoryId;
+    }
+
+    public void setCategoryId(Long categoryId) {
+        this.categoryId = categoryId;
     }
 
     public Long getUserId() {

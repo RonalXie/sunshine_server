@@ -1,6 +1,6 @@
 package com.ronalxie.mapper;
 
-import com.ronalxie.model.UserEntity;
+import com.ronalxie.model.user.UserEntity;
 
 public interface UserEntityMapper {
     int deleteByPrimaryKey(Long id);

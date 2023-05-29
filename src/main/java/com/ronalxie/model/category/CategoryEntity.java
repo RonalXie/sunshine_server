@@ -1,4 +1,4 @@
-package com.ronalxie.model;
+package com.ronalxie.model.category;
 
 import java.util.Date;
 

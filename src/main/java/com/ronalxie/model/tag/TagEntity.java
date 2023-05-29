@@ -1,4 +1,4 @@
-package com.ronalxie.model;
+package com.ronalxie.model.tag;
 
 import java.util.Date;
 

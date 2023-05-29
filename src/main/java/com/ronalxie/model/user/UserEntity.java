@@ -1,4 +1,4 @@
-package com.ronalxie.model;
+package com.ronalxie.model.user;
 
 import java.util.Date;
 

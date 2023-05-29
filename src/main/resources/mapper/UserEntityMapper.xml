@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.ronalxie.mapper.UserEntityMapper">
-  <resultMap id="BaseResultMap" type="com.ronalxie.model.UserEntity">
+  <resultMap id="BaseResultMap" type="com.ronalxie.model.user.UserEntity">
     <id column="id" jdbcType="BIGINT" property="id" />
     <result column="username" jdbcType="VARCHAR" property="username" />
     <result column="password" jdbcType="VARCHAR" property="password" />
@@ -29,7 +29,7 @@
     delete from user
     where id = #{id,jdbcType=BIGINT}
   </delete>
-  <insert id="insert" parameterType="com.ronalxie.model.UserEntity">
+  <insert id="insert" parameterType="com.ronalxie.model.user.UserEntity">
     insert into user (id, username, password, 
       nickname, intro, avater, 
       age, sex, email, create_time, 
@@ -39,7 +39,7 @@
       #{age,jdbcType=TINYINT}, #{sex,jdbcType=TINYINT}, #{email,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, 
       #{updateTime,jdbcType=TIMESTAMP}, #{deleteTime,jdbcType=TIMESTAMP})
   </insert>
-  <insert id="insertSelective" parameterType="com.ronalxie.model.UserEntity">
+  <insert id="insertSelective" parameterType="com.ronalxie.model.user.UserEntity">
     insert into user
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="id != null">
@@ -118,7 +118,7 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.ronalxie.model.UserEntity">
+  <update id="updateByPrimaryKeySelective" parameterType="com.ronalxie.model.user.UserEntity">
     update user
     <set>
       <if test="username != null">
@@ -157,7 +157,7 @@
     </set>
     where id = #{id,jdbcType=BIGINT}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.ronalxie.model.UserEntity">
+  <update id="updateByPrimaryKey" parameterType="com.ronalxie.model.user.UserEntity">
     update user
     set username = #{username,jdbcType=VARCHAR},
       password = #{password,jdbcType=VARCHAR},
