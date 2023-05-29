@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.ronalxie.mapper.ArticleEntityMapper">
-  <resultMap id="BaseResultMap" type="com.ronalxie.model.article.ArticleEntity">
+<mapper namespace="com.ronalxie.mapper.ArticleMapper">
+  <resultMap id="BaseResultMap" type="com.ronalxie.model.article.ArticleBaseEntity">
     <id column="id" jdbcType="BIGINT" property="id" />
-    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="title" jdbcType="VARCHAR" property="title" />
     <result column="abs" jdbcType="VARCHAR" property="abs" />
     <result column="content_id" jdbcType="BIGINT" property="contentId" />
     <result column="cover" jdbcType="VARCHAR" property="cover" />
@@ -15,8 +15,20 @@
     <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
     <result column="delete_time" jdbcType="TIMESTAMP" property="deleteTime" />
   </resultMap>
+  <resultMap id="BaseInfoMap" type="com.ronalxie.model.article.ArticleInfoEntity" extends="BaseResultMap">
+    <association property="category" javaType="com.ronalxie.model.category.CategoryEntity">
+      <result column="category_id" property="id"/>
+      <result column="category_name" property="name"/>
+      <result column="category_count" property="count"/>
+    </association>
+    <collection property="tags" ofType="com.ronalxie.model.tag.TagEntity">
+      <result column="tag_id" property="id"/>
+      <result column="tag_name" property="name"/>
+      <result column="tag_count" property="count"/>
+    </collection>
+  </resultMap>
   <sql id="Base_Column_List">
-    id, name, abs, content_id, cover, views, top, category_id, user_id, create_time, 
+    id, title, abs, content_id, cover, views, top, category_id, user_id, create_time,
     update_time, delete_time
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
@@ -29,26 +41,26 @@
     delete from article
     where id = #{id,jdbcType=BIGINT}
   </delete>
-  <insert id="insert" parameterType="com.ronalxie.model.article.ArticleEntity">
-    insert into article (id, name, abs, 
+  <insert id="insert" parameterType="com.ronalxie.model.article.ArticleBaseEntity">
+    insert into article (id, title, abs,
       content_id, cover, views, 
       top, category_id, user_id, 
       create_time, update_time, delete_time
       )
-    values (#{id,jdbcType=BIGINT}, #{name,jdbcType=VARCHAR}, #{abs,jdbcType=VARCHAR}, 
+    values (#{id,jdbcType=BIGINT}, #{title,jdbcType=VARCHAR}, #{abs,jdbcType=VARCHAR},
       #{contentId,jdbcType=BIGINT}, #{cover,jdbcType=VARCHAR}, #{views,jdbcType=INTEGER}, 
       #{top,jdbcType=TINYINT}, #{categoryId,jdbcType=BIGINT}, #{userId,jdbcType=BIGINT}, 
       #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}, #{deleteTime,jdbcType=TIMESTAMP}
       )
   </insert>
-  <insert id="insertSelective" parameterType="com.ronalxie.model.article.ArticleEntity">
+  <insert id="insertSelective" parameterType="com.ronalxie.model.article.ArticleBaseEntity">
     insert into article
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="id != null">
         id,
       </if>
-      <if test="name != null">
-        name,
+      <if test="title != null">
+        title,
       </if>
       <if test="abs != null">
         abs,
@@ -85,8 +97,8 @@
       <if test="id != null">
         #{id,jdbcType=BIGINT},
       </if>
-      <if test="name != null">
-        #{name,jdbcType=VARCHAR},
+      <if test="title != null">
+        #{title,jdbcType=VARCHAR},
       </if>
       <if test="abs != null">
         #{abs,jdbcType=VARCHAR},
@@ -120,11 +132,11 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.ronalxie.model.article.ArticleEntity">
+  <update id="updateByPrimaryKeySelective" parameterType="com.ronalxie.model.article.ArticleBaseEntity">
     update article
     <set>
-      <if test="name != null">
-        name = #{name,jdbcType=VARCHAR},
+      <if test="title != null">
+        title = #{title,jdbcType=VARCHAR},
       </if>
       <if test="abs != null">
         abs = #{abs,jdbcType=VARCHAR},
@@ -159,9 +171,9 @@
     </set>
     where id = #{id,jdbcType=BIGINT}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.ronalxie.model.article.ArticleEntity">
+  <update id="updateByPrimaryKey" parameterType="com.ronalxie.model.article.ArticleBaseEntity">
     update article
-    set name = #{name,jdbcType=VARCHAR},
+    set title = #{title,jdbcType=VARCHAR},
       abs = #{abs,jdbcType=VARCHAR},
       content_id = #{contentId,jdbcType=BIGINT},
       cover = #{cover,jdbcType=VARCHAR},
@@ -174,4 +186,46 @@
       delete_time = #{deleteTime,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=BIGINT}
   </update>
+  <select id="selectAllInfo" resultMap="BaseInfoMap">
+    SELECT
+      a.id,
+      a.title,
+      a.abs,
+      ct.content,
+      a.cover,
+      a.views,
+      a.top,
+      a.create_time,
+      a.update_time,
+      a.delete_time,
+      c.id as category_id,
+      c.name as category_name,
+      c.count as category_count,
+      t.id as tag_id,
+      t.name as tag_name,
+      t.count as tag_count
+    from article a
+        LEFT JOIN content ct on a.content_id=ct.id
+        LEFT JOIN category c on a.category_id=c.id
+        LEFT JOIN article_tag art  on a.id=art.article_id
+        LEFT JOIN tag t on art.tag_id=t.id
+    where 1=1
+    <if test="title != null">
+      and a.title like concat('%'#{title},'%')
+    </if>
+    <if test="top != null">
+      and a.top=#{top},
+    </if>
+    <if test="createTime != null">
+      and a.create_time=#{createTime},
+    </if>
+    <if test="updateTime != null">
+      and a.update_time=#{createTime}
+    </if>
+    <if test="deleteTime != null">
+      and a.delete_time=#{deleteTime}
+    </if>
+
+    order by a.create_time desc
+  </select>
 </mapper>

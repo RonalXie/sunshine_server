@@ -2,7 +2,7 @@ package com.ronalxie.mapper;
 
 import com.ronalxie.model.category.CategoryEntity;
 
-public interface CategoryEntityMapper {
+public interface CategoryMapper {
     int deleteByPrimaryKey(Long id);
 
     int insert(CategoryEntity record);

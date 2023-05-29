@@ -2,7 +2,7 @@ package com.ronalxie.mapper;
 
 import com.ronalxie.model.user.UserEntity;
 
-public interface UserEntityMapper {
+public interface UserMapper {
     int deleteByPrimaryKey(Long id);
 
     int insert(UserEntity record);

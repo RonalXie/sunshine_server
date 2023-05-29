@@ -2,7 +2,7 @@ package com.ronalxie.mapper;
 
 import com.ronalxie.model.attachment.attachmentEntity;
 
-public interface attachmentEntityMapper {
+public interface attachmentMapper {
     int deleteByPrimaryKey(Long id);
 
     int insert(attachmentEntity record);

@@ -2,7 +2,7 @@ package com.ronalxie.mapper;
 
 import com.ronalxie.model.tag.TagEntity;
 
-public interface TagEntityMapper {
+public interface TagMapper {
     int deleteByPrimaryKey(Long id);
 
     int insert(TagEntity record);

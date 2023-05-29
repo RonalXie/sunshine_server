@@ -1,43 +1,37 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.ronalxie.mapper.attachmentEntityMapper">
-  <resultMap id="BaseResultMap" type="com.ronalxie.model.attachment.attachmentEntity">
+<mapper namespace="com.ronalxie.mapper.TagMapper">
+  <resultMap id="BaseResultMap" type="com.ronalxie.model.tag.TagEntity">
     <id column="id" jdbcType="BIGINT" property="id" />
     <result column="name" jdbcType="VARCHAR" property="name" />
-    <result column="bucket" jdbcType="VARCHAR" property="bucket" />
-    <result column="type" jdbcType="VARCHAR" property="type" />
-    <result column="size" jdbcType="VARCHAR" property="size" />
-    <result column="url" jdbcType="VARCHAR" property="url" />
-    <result column="user_id" jdbcType="BIGINT" property="userId" />
+    <result column="count" jdbcType="INTEGER" property="count" />
     <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
     <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
     <result column="delete_time" jdbcType="TIMESTAMP" property="deleteTime" />
   </resultMap>
   <sql id="Base_Column_List">
-    id, name, bucket, type, size, url, user_id, create_time, update_time, delete_time
+    id, `name`, `count`, create_time, update_time, delete_time
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
-    from attachment
+    from tag
     where id = #{id,jdbcType=BIGINT}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
-    delete from attachment
+    delete from tag
     where id = #{id,jdbcType=BIGINT}
   </delete>
-  <insert id="insert" parameterType="com.ronalxie.model.attachment.attachmentEntity">
-    insert into attachment (id, name, bucket, 
-      type, size, url, user_id, 
+  <insert id="insert" parameterType="com.ronalxie.model.tag.TagEntity">
+    insert into tag (id, name, count, 
       create_time, update_time, delete_time
       )
-    values (#{id,jdbcType=BIGINT}, #{name,jdbcType=VARCHAR}, #{bucket,jdbcType=VARCHAR}, 
-      #{type,jdbcType=VARCHAR}, #{size,jdbcType=VARCHAR}, #{url,jdbcType=VARCHAR}, #{userId,jdbcType=BIGINT}, 
+    values (#{id,jdbcType=BIGINT}, #{name,jdbcType=VARCHAR}, #{count,jdbcType=INTEGER}, 
       #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}, #{deleteTime,jdbcType=TIMESTAMP}
       )
   </insert>
-  <insert id="insertSelective" parameterType="com.ronalxie.model.attachment.attachmentEntity">
-    insert into attachment
+  <insert id="insertSelective" parameterType="com.ronalxie.model.tag.TagEntity">
+    insert into tag
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="id != null">
         id,
@@ -45,20 +39,8 @@
       <if test="name != null">
         name,
       </if>
-      <if test="bucket != null">
-        bucket,
-      </if>
-      <if test="type != null">
-        type,
-      </if>
-      <if test="size != null">
-        size,
-      </if>
-      <if test="url != null">
-        url,
-      </if>
-      <if test="userId != null">
-        user_id,
+      <if test="count != null">
+        count,
       </if>
       <if test="createTime != null">
         create_time,
@@ -77,20 +59,8 @@
       <if test="name != null">
         #{name,jdbcType=VARCHAR},
       </if>
-      <if test="bucket != null">
-        #{bucket,jdbcType=VARCHAR},
-      </if>
-      <if test="type != null">
-        #{type,jdbcType=VARCHAR},
-      </if>
-      <if test="size != null">
-        #{size,jdbcType=VARCHAR},
-      </if>
-      <if test="url != null">
-        #{url,jdbcType=VARCHAR},
-      </if>
-      <if test="userId != null">
-        #{userId,jdbcType=BIGINT},
+      <if test="count != null">
+        #{count,jdbcType=INTEGER},
       </if>
       <if test="createTime != null">
         #{createTime,jdbcType=TIMESTAMP},
@@ -103,26 +73,14 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.ronalxie.model.attachment.attachmentEntity">
-    update attachment
+  <update id="updateByPrimaryKeySelective" parameterType="com.ronalxie.model.tag.TagEntity">
+    update tag
     <set>
       <if test="name != null">
         name = #{name,jdbcType=VARCHAR},
       </if>
-      <if test="bucket != null">
-        bucket = #{bucket,jdbcType=VARCHAR},
-      </if>
-      <if test="type != null">
-        type = #{type,jdbcType=VARCHAR},
-      </if>
-      <if test="size != null">
-        size = #{size,jdbcType=VARCHAR},
-      </if>
-      <if test="url != null">
-        url = #{url,jdbcType=VARCHAR},
-      </if>
-      <if test="userId != null">
-        user_id = #{userId,jdbcType=BIGINT},
+      <if test="count != null">
+        count = #{count,jdbcType=INTEGER},
       </if>
       <if test="createTime != null">
         create_time = #{createTime,jdbcType=TIMESTAMP},
@@ -136,14 +94,10 @@
     </set>
     where id = #{id,jdbcType=BIGINT}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.ronalxie.model.attachment.attachmentEntity">
-    update attachment
+  <update id="updateByPrimaryKey" parameterType="com.ronalxie.model.tag.TagEntity">
+    update tag
     set name = #{name,jdbcType=VARCHAR},
-      bucket = #{bucket,jdbcType=VARCHAR},
-      type = #{type,jdbcType=VARCHAR},
-      size = #{size,jdbcType=VARCHAR},
-      url = #{url,jdbcType=VARCHAR},
-      user_id = #{userId,jdbcType=BIGINT},
+      count = #{count,jdbcType=INTEGER},
       create_time = #{createTime,jdbcType=TIMESTAMP},
       update_time = #{updateTime,jdbcType=TIMESTAMP},
       delete_time = #{deleteTime,jdbcType=TIMESTAMP}
