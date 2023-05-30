@@ -1,7 +1,10 @@
 package com.ronalxie.mapper;
 
 import com.ronalxie.model.category.CategoryEntity;
+import com.ronalxie.model.category.dto.CategorySearchDto;
 import org.apache.ibatis.annotations.Mapper;
+
+import java.util.List;
 
 @Mapper
 public interface CategoryMapper {
@@ -17,4 +20,5 @@ public interface CategoryMapper {
 
     int updateByPrimaryKey(CategoryEntity record);
 
+    List<CategoryEntity> searchList(CategoryEntity categoryEntity);
 }

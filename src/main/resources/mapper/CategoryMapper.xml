@@ -18,7 +18,7 @@
     from category
     where id = #{id,jdbcType=BIGINT}
   </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
     delete from category
     where id = #{id,jdbcType=BIGINT}
   </delete>
@@ -103,4 +103,22 @@
       delete_time = #{deleteTime,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=BIGINT}
   </update>
+
+  <select id="searchList" resultMap="BaseResultMap" parameterType="com.ronalxie.model.category.CategoryEntity">
+    select <include refid="Base_Column_List"></include>
+        from category
+    where 1=1
+    <if test="id!=null">
+        and id=#{id}
+    </if>
+    <if test="name!=null">
+      and name like concat('%',#{name},'%')
+    </if>
+    <if test="createTime">
+     and create_time =#{createTime}
+    </if>
+    order by count desc
+
+  </select>
+
 </mapper>

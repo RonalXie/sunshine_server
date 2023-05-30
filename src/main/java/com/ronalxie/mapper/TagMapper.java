@@ -22,4 +22,5 @@ public interface TagMapper {
 
     List<TagEntity> selectByArticleId(Long articleId);
 
+    List<TagEntity> searchList(TagEntity tagEntity);
 }

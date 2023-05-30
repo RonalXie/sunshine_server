@@ -107,6 +107,21 @@
     select <include refid="Base_Column_List"></include> from tag
             where id in(select tag_id from article_tag where article_id =#{articleId})
   </select>
+    <select id="searchList" resultMap="BaseResultMap" parameterType="com.ronalxie.model.tag.TagEntity">
+              select <include refid="Base_Column_List"></include>
+                  from tag
+              where 1=1
+      <if test="id!=null">
+        and id=#{id}
+      </if>
+      <if test="name!=null">
+        and name like concat('%',#{name},'%')
+      </if>
+      <if test="createTime">
+        and create_time =#{createTime}
+      </if>
+      order by count desc
+    </select>
 
 
 </mapper>
