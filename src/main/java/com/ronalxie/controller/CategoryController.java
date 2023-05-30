@@ -1,5 +1,6 @@
 package com.ronalxie.controller;
 
+import com.ronalxie.model.PageBean;
 import com.ronalxie.model.PageParam;
 import com.ronalxie.model.RespBean;
 import com.ronalxie.model.category.dto.CategorySearchDto;
@@ -22,9 +23,14 @@ public class CategoryController {
 
 
     @RequestMapping(value = "searchList",method = RequestMethod.POST)
-    public RespBean searchList(PageParam pageParam, @RequestBody(required = false) CategorySearchDto categorySearchDto){
-        List<CategoryBaseVo> categoryBaseVoList=categoryService.seachList(pageParam,categorySearchDto);
+    public RespBean searchList(@RequestBody(required = false) CategorySearchDto categorySearchDto){
+        List<CategoryBaseVo> categoryBaseVoList=categoryService.searchList(categorySearchDto);
         return RespBean.success("分类列表",categoryBaseVoList);
+    }
+    @RequestMapping(value = "searchPage",method = RequestMethod.POST)
+    public RespBean searchPage(PageParam pageParam, @RequestBody(required = false) CategorySearchDto categorySearchDto){
+        PageBean<CategoryBaseVo> pageBean = categoryService.searchPage(pageParam,categorySearchDto);
+        return RespBean.success("分类列表",pageBean);
     }
 
 
