@@ -73,6 +73,7 @@ public class ArticleServiceImpl implements ArticleService {
             articlePageVo.setViews(item.getViews());
             articlePageVo.setCreateTime(item.getCreateTime());
             articlePageVo.setTop(item.getTop());
+            articlePageVo.setSummary(item.getSummary());
             articlePageVoList.add(articlePageVo);
         });
         PageBean<ArticlePageVo> pageBean=new PageBean<>();

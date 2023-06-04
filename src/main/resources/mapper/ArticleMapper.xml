@@ -4,7 +4,7 @@
   <resultMap id="BaseResultMap" type="com.ronalxie.model.article.ArticleBaseEntity">
     <id column="id" jdbcType="BIGINT" property="id" />
     <result column="title" jdbcType="VARCHAR" property="title" />
-    <result column="abs" jdbcType="VARCHAR" property="abs" />
+    <result column="summary" jdbcType="VARCHAR" property="summary" />
     <result column="cover" jdbcType="VARCHAR" property="cover" />
     <result column="views" jdbcType="INTEGER" property="views" />
     <result column="top" jdbcType="TINYINT" property="top" />
@@ -36,7 +36,7 @@
 <!--    </collection>-->
 <!--  </resultMap>-->
   <sql id="Base_Column_List">
-    id, title, abs, cover, views, top, category_id, user_id, create_time,
+    id, title, summary, cover, views, top, category_id, user_id, create_time,
     update_time, delete_time
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
@@ -50,12 +50,12 @@
     where id = #{id,jdbcType=BIGINT}
   </delete>
   <insert id="insert" parameterType="com.ronalxie.model.article.ArticleBaseEntity">
-    insert into article (id, title, abs,
+    insert into article (id, title, summary,
     cover, views,
       top, category_id, user_id, 
       create_time, update_time, delete_time
       )
-    values (#{id,jdbcType=BIGINT}, #{title,jdbcType=VARCHAR}, #{abs,jdbcType=VARCHAR},
+    values (#{id,jdbcType=BIGINT}, #{title,jdbcType=VARCHAR}, #{summary,jdbcType=VARCHAR},
        #{cover,jdbcType=VARCHAR}, #{views,jdbcType=INTEGER},
       #{top,jdbcType=TINYINT}, #{categoryId,jdbcType=BIGINT}, #{userId,jdbcType=BIGINT}, 
       #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}, #{deleteTime,jdbcType=TIMESTAMP}
@@ -70,8 +70,8 @@
       <if test="title != null">
         title,
       </if>
-      <if test="abs != null">
-        abs,
+      <if test="summary != null">
+        summary,
       </if>
       <if test="cover != null">
         cover,
@@ -105,8 +105,8 @@
       <if test="title != null">
         #{title,jdbcType=VARCHAR},
       </if>
-      <if test="abs != null">
-        #{abs,jdbcType=VARCHAR},
+      <if test="summary != null">
+        #{summary,jdbcType=VARCHAR},
       </if>
       <if test="cover != null">
         #{cover,jdbcType=VARCHAR},
@@ -140,8 +140,8 @@
       <if test="title != null">
         title = #{title,jdbcType=VARCHAR},
       </if>
-      <if test="abs != null">
-        abs = #{abs,jdbcType=VARCHAR},
+      <if test="summary != null">
+        summary = #{summary,jdbcType=VARCHAR},
       </if>
       <if test="cover != null">
         cover = #{cover,jdbcType=VARCHAR},
@@ -173,7 +173,7 @@
   <update id="updateByPrimaryKey" parameterType="com.ronalxie.model.article.ArticleBaseEntity">
     update article
     set title = #{title,jdbcType=VARCHAR},
-      abs = #{abs,jdbcType=VARCHAR},
+      summary = #{summary,jdbcType=VARCHAR},
       cover = #{cover,jdbcType=VARCHAR},
       views = #{views,jdbcType=INTEGER},
       top = #{top,jdbcType=TINYINT},
@@ -188,7 +188,7 @@
     SELECT
       a.id,
       a.title,
-      a.abs,
+      a.summary,
       a.cover,
       a.views,
       a.top,

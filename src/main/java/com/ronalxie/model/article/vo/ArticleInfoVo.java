@@ -18,7 +18,7 @@ public class ArticleInfoVo {
 
     private String title;
 
-    private String abs;
+    private String summary;
 
     private String cover;
 

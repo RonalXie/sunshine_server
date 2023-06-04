@@ -17,7 +17,7 @@ public class ArticleInfoEntity {
 
     private String title;
 
-    private String abs;
+    private String summary;
 
     private String content;
 
