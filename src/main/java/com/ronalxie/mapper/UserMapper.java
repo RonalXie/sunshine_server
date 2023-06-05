@@ -1,7 +1,9 @@
 package com.ronalxie.mapper;
 
 import com.ronalxie.model.user.UserEntity;
+import org.apache.ibatis.annotations.Mapper;
 
+@Mapper
 public interface UserMapper {
     int deleteByPrimaryKey(Long id);
 
