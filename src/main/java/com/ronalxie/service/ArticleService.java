@@ -2,6 +2,7 @@ package com.ronalxie.service;
 
 import com.ronalxie.model.PageBean;
 import com.ronalxie.model.PageParam;
+import com.ronalxie.model.article.dto.ArticleSavaDto;
 import com.ronalxie.model.article.dto.ArticleSearchDto;
 import com.ronalxie.model.article.vo.ArticleBaseVo;
 import com.ronalxie.model.article.vo.ArticleInfoVo;
@@ -16,4 +17,6 @@ public interface ArticleService {
     List<ArticleBaseVo> searchBaseSort(String sort, ArticleSearchDto articleSearchDto);
 
     ArticleInfoVo searchArticleInfo(ArticleSearchDto articleSearchDto);
+
+    void save(ArticleSavaDto articleSavaDto);
 }

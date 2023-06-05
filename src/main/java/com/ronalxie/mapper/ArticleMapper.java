@@ -5,6 +5,7 @@ import com.ronalxie.model.article.ArticleInfoEntity;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
+import java.util.Map;
 
 @Mapper
 public interface ArticleMapper {
@@ -22,5 +23,8 @@ public interface ArticleMapper {
 
     List<ArticleInfoEntity> selectAllInfo(ArticleBaseEntity articleBaseEntity);
 
+    void insertContent(Map<String,Object> contentMap);
 
+
+    void insertArticleTag(Map<String, Long> articleRefTag);
 }

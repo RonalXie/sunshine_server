@@ -9,21 +9,22 @@ import com.ronalxie.model.PageBean;
 import com.ronalxie.model.PageParam;
 import com.ronalxie.model.article.ArticleBaseEntity;
 import com.ronalxie.model.article.ArticleInfoEntity;
+import com.ronalxie.model.article.dto.ArticleSavaDto;
 import com.ronalxie.model.article.dto.ArticleSearchDto;
 import com.ronalxie.model.article.vo.ArticleBaseVo;
 import com.ronalxie.model.article.vo.ArticleInfoVo;
 import com.ronalxie.model.article.vo.ArticlePageVo;
 import com.ronalxie.model.category.CategoryEntity;
 import com.ronalxie.service.ArticleService;
+import com.ronalxie.util.BeanCopyUtils;
+import com.ronalxie.util.IDUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.ObjectUtils;
 
 import javax.annotation.Resource;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Service
@@ -125,5 +126,29 @@ public class ArticleServiceImpl implements ArticleService {
         articleInfoVo.setTags(tagMapper.selectByArticleId(articleInfoVo.getId()));
 
         return articleInfoVo;
+    }
+
+    @Override
+    @Transactional
+    public void save(ArticleSavaDto articleSavaDto) {
+        //保存文章基本信息
+        ArticleBaseEntity articleBaseEntity = BeanCopyUtils.copyBean(articleSavaDto, ArticleBaseEntity.class);
+        Long id=IDUtils.nextId();
+        articleBaseEntity.setId(id);
+        articleBaseEntity.setCreateTime(new Date());
+        articleMapper.insertSelective(articleBaseEntity);
+        //保存内容
+        Map<String,Object> contentMap=new HashMap<>();
+        contentMap.put("articleId",id);
+        contentMap.put("content",articleSavaDto.getContent());
+        articleMapper.insertContent(contentMap);
+        //保存标签
+        Long[] tagIds = articleSavaDto.getTagIds();
+        Map<String,Long> articleRefTag=new HashMap<>();
+        for (Long tagId : tagIds) {
+            articleRefTag.put("articleId",id);
+            articleRefTag.put("tagId",tagId);
+            articleMapper.insertArticleTag(articleRefTag);
+        }
     }
 }

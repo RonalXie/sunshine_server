@@ -219,4 +219,12 @@
       and a.delete_time=#{deleteTime}
     </if>
   </select>
+
+  <insert id="insertContent" parameterType="map">
+    insert into content (article_id,content) values(#{articleId,jdbcType=BIGINT},#{content,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertArticleTag" parameterType="map">
+    insert into article_tag(article_id,tag_id) values (#{articleId,jdbcType=BIGINT},#{tagId,jdbcType=BIGINT})
+  </insert>
+
 </mapper>
