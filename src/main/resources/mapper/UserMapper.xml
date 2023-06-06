@@ -25,7 +25,7 @@
     from user
     where id = #{id,jdbcType=BIGINT}
   </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
     delete from user
     where id = #{id,jdbcType=BIGINT}
   </delete>
@@ -172,4 +172,17 @@
       delete_time = #{deleteTime,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=BIGINT}
   </update>
+
+  <select id="searchUser" resultType="com.ronalxie.model.user.UserEntity">
+    select <include refid="Base_Column_List"></include>
+        from user where 1=1
+    <if test="username!=null">
+      and username=#{username,jdbcType=VARCHAR}
+    </if>
+    <if test="password!=null">
+      and password=#{password,jdbcType=VARCHAR}
+    </if>
+
+  </select>
+
 </mapper>

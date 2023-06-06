@@ -16,4 +16,6 @@ public interface UserMapper {
     int updateByPrimaryKeySelective(UserEntity record);
 
     int updateByPrimaryKey(UserEntity record);
+
+    UserEntity searchUser(UserEntity userEntity);
 }

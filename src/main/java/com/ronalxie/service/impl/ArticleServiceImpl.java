@@ -3,6 +3,7 @@ package com.ronalxie.service.impl;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.ronalxie.mapper.ArticleMapper;
+import com.ronalxie.mapper.AttachmentMapper;
 import com.ronalxie.mapper.CategoryMapper;
 import com.ronalxie.mapper.TagMapper;
 import com.ronalxie.model.PageBean;
@@ -14,6 +15,7 @@ import com.ronalxie.model.article.dto.ArticleSearchDto;
 import com.ronalxie.model.article.vo.ArticleBaseVo;
 import com.ronalxie.model.article.vo.ArticleInfoVo;
 import com.ronalxie.model.article.vo.ArticlePageVo;
+import com.ronalxie.model.attachment.AttachmentEntity;
 import com.ronalxie.model.category.CategoryEntity;
 import com.ronalxie.service.ArticleService;
 import com.ronalxie.util.BeanCopyUtils;
@@ -38,6 +40,9 @@ public class ArticleServiceImpl implements ArticleService {
 
     @Resource
     private CategoryMapper categoryMapper;
+
+    @Resource
+    private AttachmentMapper attachmentMapper;
 
     @Override
     public PageBean<ArticlePageVo> searchPageInfo(PageParam pageParam, ArticleSearchDto articleSearchDto) {
