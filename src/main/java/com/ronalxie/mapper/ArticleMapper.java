@@ -27,4 +27,8 @@ public interface ArticleMapper {
 
 
     void insertArticleTag(Map<String, Long> articleRefTag);
+
+    void deleteArticleTag(Long id);
+
+    void deleteContent(Long id);
 }

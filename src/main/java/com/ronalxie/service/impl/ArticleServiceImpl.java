@@ -156,4 +156,15 @@ public class ArticleServiceImpl implements ArticleService {
             articleMapper.insertArticleTag(articleRefTag);
         }
     }
+
+    @Override
+    @Transactional
+    public void delete(Long id) {
+        //删除文章
+        articleMapper.deleteByPrimaryKey(id);
+        //删除内容
+        articleMapper.deleteContent(id);
+        //删除标签关联关系
+        articleMapper.deleteArticleTag(id);
+    }
 }

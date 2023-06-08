@@ -49,6 +49,12 @@
     delete from article
     where id = #{id,jdbcType=BIGINT}
   </delete>
+  <delete id="deleteArticleTag">
+    delete from article_tag where article_id=#{id,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteContent">
+    delete from content where article_id=#{id,jdbcType=BIGINT}
+  </delete>
   <insert id="insert" parameterType="com.ronalxie.model.article.ArticleBaseEntity">
     insert into article (id, title, summary,
     cover, views,
@@ -109,7 +115,7 @@
         #{summary,jdbcType=VARCHAR},
       </if>
       <if test="cover != null">
-        #{coverId,jdbcType=VARCHAR},
+        #{cover,jdbcType=VARCHAR},
       </if>
       <if test="views != null">
         #{views,jdbcType=INTEGER},

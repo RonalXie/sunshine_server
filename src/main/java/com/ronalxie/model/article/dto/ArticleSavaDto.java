@@ -15,7 +15,7 @@ public class ArticleSavaDto {
 
     private String summary;
 
-    private Long coverId;
+    private String cover;
 
     private Boolean top;
 

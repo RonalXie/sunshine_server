@@ -49,6 +49,10 @@ public class ArticleController {
         return RespBean.success("保存成功");
     }
 
+    @RequestMapping(value = "delete",method = RequestMethod.POST)
+    public void delete(Long id){
+        articleService.delete(id);
+    }
 
 
 }

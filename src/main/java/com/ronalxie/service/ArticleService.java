@@ -19,4 +19,6 @@ public interface ArticleService {
     ArticleInfoVo searchArticleInfo(ArticleSearchDto articleSearchDto);
 
     void save(ArticleSavaDto articleSavaDto);
+
+    void delete(Long id);
 }

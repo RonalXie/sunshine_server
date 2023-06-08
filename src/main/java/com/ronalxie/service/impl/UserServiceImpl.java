@@ -3,6 +3,7 @@ package com.ronalxie.service.impl;
 import com.ronalxie.mapper.UserMapper;
 import com.ronalxie.model.user.UserEntity;
 import com.ronalxie.model.user.dto.UserLoginDto;
+import com.ronalxie.model.user.vo.UserInfoVo;
 import com.ronalxie.service.UserService;
 import com.ronalxie.util.BeanCopyUtils;
 import com.ronalxie.util.JwtUtils;
@@ -28,5 +29,12 @@ public class UserServiceImpl implements UserService {
         String token = JwtUtils.generateToken(userEntity.getId().toString());
         return token;
 
+    }
+
+    @Override
+    public UserInfoVo searchUser(Long id) {
+        UserEntity userEntity = userMapper.selectByPrimaryKey(id);
+        UserInfoVo userInfoVo = BeanCopyUtils.copyBean(userEntity, UserInfoVo.class);
+        return userInfoVo;
     }
 }
