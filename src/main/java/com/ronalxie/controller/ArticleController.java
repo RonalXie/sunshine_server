@@ -5,6 +5,7 @@ import com.ronalxie.model.PageParam;
 import com.ronalxie.model.RespBean;
 import com.ronalxie.model.article.dto.ArticleSavaDto;
 import com.ronalxie.model.article.dto.ArticleSearchDto;
+import com.ronalxie.model.article.dto.ArticleUpdateDto;
 import com.ronalxie.model.article.vo.ArticleBaseVo;
 import com.ronalxie.service.ArticleService;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -49,9 +50,21 @@ public class ArticleController {
         return RespBean.success("保存成功");
     }
 
+    @RequestMapping(value = "/update",method = RequestMethod.POST)
+    public RespBean update(@RequestBody ArticleUpdateDto articleUpdateDto){
+        articleService.update(articleUpdateDto);
+        return RespBean.success("保存成功");
+    }
+
     @RequestMapping(value = "delete",method = RequestMethod.POST)
     public void delete(Long id){
         articleService.delete(id);
+    }
+
+    @RequestMapping(value = "searchContent",method = RequestMethod.POST)
+    public RespBean searchContent(Long id){
+        String content=articleService.searchContent(id);
+        return RespBean.success("文章内容",content);
     }
 
 

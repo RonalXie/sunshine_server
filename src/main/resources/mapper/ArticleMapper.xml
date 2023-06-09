@@ -190,6 +190,10 @@
       delete_time = #{deleteTime,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=BIGINT}
   </update>
+  <update id="updateContent">
+    update content set content=#{content} where article_id=#{articleId}
+
+  </update>
   <select id="selectAllInfo" resultMap="BaseInfoMap">
     SELECT
       a.id,
@@ -225,8 +229,11 @@
       and a.delete_time=#{deleteTime}
     </if>
   </select>
+    <select id="searchContent" resultType="java.lang.String">
+      select content from content where article_id=#{articleId}
+    </select>
 
-  <insert id="insertContent" parameterType="map">
+    <insert id="insertContent" parameterType="map">
     insert into content (article_id,content) values(#{articleId,jdbcType=BIGINT},#{content,jdbcType=LONGVARCHAR})
   </insert>
   <insert id="insertArticleTag" parameterType="map">

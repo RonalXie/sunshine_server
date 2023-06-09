@@ -31,4 +31,8 @@ public interface ArticleMapper {
     void deleteArticleTag(Long id);
 
     void deleteContent(Long id);
+
+    String searchContent(Long articleId);
+
+    void updateContent(Map map);
 }

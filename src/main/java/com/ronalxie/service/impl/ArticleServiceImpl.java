@@ -12,6 +12,7 @@ import com.ronalxie.model.article.ArticleBaseEntity;
 import com.ronalxie.model.article.ArticleInfoEntity;
 import com.ronalxie.model.article.dto.ArticleSavaDto;
 import com.ronalxie.model.article.dto.ArticleSearchDto;
+import com.ronalxie.model.article.dto.ArticleUpdateDto;
 import com.ronalxie.model.article.vo.ArticleBaseVo;
 import com.ronalxie.model.article.vo.ArticleInfoVo;
 import com.ronalxie.model.article.vo.ArticlePageVo;
@@ -166,5 +167,33 @@ public class ArticleServiceImpl implements ArticleService {
         articleMapper.deleteContent(id);
         //删除标签关联关系
         articleMapper.deleteArticleTag(id);
+    }
+
+    @Override
+    public String searchContent(Long id) {
+        return articleMapper.searchContent(id);
+    }
+
+    @Override
+    @Transactional
+    public void update(ArticleUpdateDto articleUpdateDto) {
+        //更新文章表
+        ArticleBaseEntity articleBaseEntity = BeanCopyUtils.copyBean(articleUpdateDto, ArticleBaseEntity.class);
+        articleBaseEntity.setUpdateTime(new Date());
+        articleMapper.updateByPrimaryKeySelective(articleBaseEntity);
+        //更新内容表
+        Map<String,Object> map=new HashMap<>();
+        map.put("articleId",articleUpdateDto.getId());
+        map.put("content",articleUpdateDto.getContent());
+        articleMapper.updateContent(map);
+        //更新标签关联表
+        articleMapper.deleteArticleTag(articleUpdateDto.getId());
+        Long[] tagIds = articleUpdateDto.getTagIds();
+        Map<String,Long> articleRefTag=new HashMap<>();
+        for (Long tagId : tagIds) {
+            articleRefTag.put("articleId",articleUpdateDto.getId());
+            articleRefTag.put("tagId",tagId);
+            articleMapper.insertArticleTag(articleRefTag);
+        }
     }
 }

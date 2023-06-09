@@ -6,15 +6,19 @@ import com.ronalxie.mapper.CategoryMapper;
 import com.ronalxie.model.PageBean;
 import com.ronalxie.model.PageParam;
 import com.ronalxie.model.category.CategoryEntity;
+import com.ronalxie.model.category.dto.CategoryHandleDto;
 import com.ronalxie.model.category.dto.CategorySearchDto;
 import com.ronalxie.model.category.vo.CategoryBaseVo;
 import com.ronalxie.service.CategoryService;
+import com.ronalxie.util.BeanCopyUtils;
+import com.ronalxie.util.IDUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.util.ObjectUtils;
 
 import javax.annotation.Resource;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 
@@ -64,5 +68,19 @@ public class CategoryServiceImpl implements CategoryService {
         pageBean.setTotal(pageInfo.getTotal());
         pageBean.setDataList(categoryBaseVoList);
         return pageBean;
+    }
+
+    @Override
+    public void save(CategoryHandleDto categoryHandleDto) {
+        CategoryEntity categoryEntity = BeanCopyUtils.copyBean(categoryHandleDto, CategoryEntity.class);
+        categoryEntity.setId(IDUtils.nextId());
+        categoryEntity.setCreateTime(new Date());
+        categoryMapper.insert(categoryEntity);
+    }
+
+    @Override
+    public void update(CategoryHandleDto categoryHandleDto) {
+        CategoryEntity categoryEntity = BeanCopyUtils.copyBean(categoryHandleDto, CategoryEntity.class);
+        categoryMapper.updateByPrimaryKeySelective(categoryEntity);
     }
 }

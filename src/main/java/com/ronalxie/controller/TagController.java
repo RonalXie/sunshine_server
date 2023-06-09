@@ -3,6 +3,7 @@ package com.ronalxie.controller;
 import com.ronalxie.model.PageBean;
 import com.ronalxie.model.PageParam;
 import com.ronalxie.model.RespBean;
+import com.ronalxie.model.tag.dto.TagHandleDto;
 import com.ronalxie.model.tag.dto.TagSearchDto;
 import com.ronalxie.model.tag.vo.TagBaseVo;
 import com.ronalxie.service.TagService;
@@ -31,6 +32,16 @@ public class TagController {
     public RespBean searchPage(PageParam pageParam, @RequestBody(required = false) TagSearchDto tagSearchDto){
         PageBean<TagBaseVo> pageBean=tagService.searchPage(pageParam,tagSearchDto);
         return RespBean.success("标签列表",pageBean);
+    }
+
+    @RequestMapping(value = "save",method = RequestMethod.POST)
+    public void save(@RequestBody TagHandleDto tagHandleDto){
+        tagService.save(tagHandleDto);
+    }
+
+    @RequestMapping(value = "update",method = RequestMethod.POST)
+    public void update(@RequestBody TagHandleDto tagHandleDto){
+        tagService.update(tagHandleDto);
     }
 
 

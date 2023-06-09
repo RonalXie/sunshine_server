@@ -3,6 +3,7 @@ package com.ronalxie.controller;
 import com.ronalxie.model.PageBean;
 import com.ronalxie.model.PageParam;
 import com.ronalxie.model.RespBean;
+import com.ronalxie.model.category.dto.CategoryHandleDto;
 import com.ronalxie.model.category.dto.CategorySearchDto;
 import com.ronalxie.model.category.vo.CategoryBaseVo;
 import com.ronalxie.service.CategoryService;
@@ -32,6 +33,18 @@ public class CategoryController {
         PageBean<CategoryBaseVo> pageBean = categoryService.searchPage(pageParam,categorySearchDto);
         return RespBean.success("分类列表",pageBean);
     }
+
+    @RequestMapping(value = "save",method = RequestMethod.POST)
+    public void save(@RequestBody CategoryHandleDto categoryHandleDto){
+        categoryService.save(categoryHandleDto);
+    }
+
+    @RequestMapping(value = "update",method = RequestMethod.POST)
+    public void update(@RequestBody CategoryHandleDto categoryHandleDto){
+        categoryService.update(categoryHandleDto);
+    }
+
+
 
 
 }
